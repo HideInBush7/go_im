@@ -1,0 +1,4 @@
+etcd:
+  endPoints:
+    -
+      env_etcd_1:2379

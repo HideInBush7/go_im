@@ -1,0 +1,4 @@
+redis:
+  address: env_redis_1:6379
+  maxIdleConns: 3
+  idleTimeout: 3
