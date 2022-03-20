@@ -12,12 +12,12 @@ func Init() *gin.Engine {
 
 	userGroup := r.Group("/user")
 	{
-		userGroup.POST("/login")
+		userGroup.POST("/login", handler.Login)
 		userGroup.POST("/register", handler.Register)
 	}
 	userGroup.Use(middleware.Auth)
 	{
-		userGroup.POST("/logout")
+		userGroup.POST("/logout", handler.Logout)
 	}
 	// sendGroup := r.Group("/")
 	return r

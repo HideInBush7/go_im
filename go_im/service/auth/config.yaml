@@ -1,0 +1,19 @@
+etcd:
+  endPoints:
+    -
+      env_etcd_1:2379
+
+mysql:
+  dsn: root:root@tcp(env_mysql_1:3306)/go_server?charset=utf8mb4&parseTime=True
+  maxIdleConns: 10
+  maxOpenConns: 20
+
+redis:
+  address: env_redis_1:6379
+  maxIdleConns: 3
+  idleTimeout: 240
+
+log:
+  debug: true
+  loglevel: debug
+  logfile: log

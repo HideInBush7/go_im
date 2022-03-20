@@ -13,6 +13,8 @@ type redisConf struct {
 	IdleTimeout int    `json:"idleTimeout"`
 }
 
+var ErrNil = redis.ErrNil
+
 var redisPool *redis.Pool
 
 func init() {
@@ -42,4 +44,20 @@ func init() {
 // 获取redis连接实例
 func GetInstance() redis.Conn {
 	return redisPool.Get()
+}
+
+func Do(command string, args ...interface{}) (interface{}, error) {
+	return GetInstance().Do(command, args...)
+}
+
+func IntDo(command string, args ...interface{}) (int, error) {
+	return redis.Int(Do(command, args...))
+}
+
+func StringDo(command string, args ...interface{}) (string, error) {
+	return redis.String(Do(command, args...))
+}
+
+func BoolDo(command string, args ...interface{}) (bool, error) {
+	return redis.Bool(Do(command, args...))
 }

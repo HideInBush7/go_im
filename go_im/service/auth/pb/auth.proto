@@ -12,7 +12,7 @@ message RegisterRequest {
 message RegisterReply {
     int64 uid = 1;
     string token = 2;
-    Code code = 3;
+    int32 code = 3;
 }  
 
 // 登录请求
@@ -25,19 +25,7 @@ message LoginRequest {
 message LoginReply {
     int64 uid = 1;
     string token = 2;
-    Code code = 3;
-}
-
-// 根据uid获取用户
-message GetUserByUidRequest {
-    int64 uid = 1;
-}
-
-// 根据uid获取用户响应
-message GetUserByUidReply {
-    int64 uid = 1;
-    string username = 2;
-    Code code = 3;
+    int32 code = 3;
 }
 
 // 验证token请求
@@ -48,7 +36,7 @@ message AuthRequest {
 
 // 验证token响应
 message AuthReply {
-    Code Code = 1;
+    int32 code = 1;
 }
 
 // 登出请求
@@ -59,25 +47,14 @@ message LogoutRequest {
 
 // 登出响应
 message LogoutReply {
+    int32 code = 1;
 }
 
-// 响应代码
-enum Code {
-    SUCCESS = 0;
-    ERROR = 500;
-    USER_NOT_EXIST = 50001;
-    USER_ALREADY_EXIST = 50002;
-    USER_PASSWORD_WRONG = 50003; 
-    AUTH_FAILED = 50004;
-}
-
-service User {
+service Auth {
     // 登录
     rpc Login(LoginRequest) returns (LoginReply);
     // 注册
     rpc Register(RegisterRequest) returns (RegisterReply);
-    // 根据uid获取用户
-    rpc GetUserByUid(GetUserByUidRequest) returns (GetUserByUidReply);
     // 验证token
     rpc Auth(AuthRequest) returns (AuthReply);
     // 登出

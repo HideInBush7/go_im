@@ -20,7 +20,7 @@ func init() {
 	config.Register(`mysql`, &conf)
 
 	var err error
-	db, err := sqlx.Connect(`mysql`, conf.Dsn)
+	db, err = sqlx.Connect(`mysql`, conf.Dsn)
 	if err != nil {
 		panic(err)
 	}

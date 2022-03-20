@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"unsafe"
 )
 
 // 获取本机内网IP
@@ -55,4 +56,17 @@ func GetDbFieldNames(in interface{}) (result []string) {
 		result = append(result, tag)
 	}
 	return
+}
+
+func StringToBytes(s string) []byte {
+	return *(*[]byte)(unsafe.Pointer(
+		&struct {
+			string
+			cap int
+		}{s, len(s)},
+	))
+}
+
+func BytesToString(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
 }

@@ -48,7 +48,7 @@ func (r *etcdRegistration) Register(target string, addr string, ttl int64) error
 	go func() {
 		for {
 			// close(keepAlive)会<-nil
-			if res := keepAlive; res == nil {
+			if res := <-keepAlive; res == nil {
 				fmt.Println(`keepAlive closed...`)
 				return
 			}

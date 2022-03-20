@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 检查请求是否携带token
 func Auth(ctx *gin.Context) {
 
 }
